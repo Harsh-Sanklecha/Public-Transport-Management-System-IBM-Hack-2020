@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "765019537226",
+    "firebase_url": "https://edsac-transport-management-sys.firebaseio.com",
+    "project_id": "edsac-transport-management-sys",
+    "storage_bucket": "edsac-transport-management-sys.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765019537226:android:601c94328d0cd75ae5cbb3",
+        "android_client_info": {
+          "package_name": "com.edsac.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765019537226-j4uti0v19obcddbgvot706da7m5deik1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edsac.flutterapp",
+            "certificate_hash": "e810b0c4c9acef28b23c082f9c9f26a97c221e40"
+          }
+        },
+        {
+          "client_id": "765019537226-p1pbjo93kqfd5ddf318g7h52fn82igao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa45RWf4VYqrJlPei5vgFPHfhBikmC9qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765019537226-p1pbjo93kqfd5ddf318g7h52fn82igao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
