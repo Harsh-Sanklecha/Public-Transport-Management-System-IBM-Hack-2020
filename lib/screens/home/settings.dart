@@ -63,7 +63,7 @@ class _SettingsState extends State<Settings> {
                   child: CircleAvatar( 
                     radius: 30.0,
                     backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage('https://lh3.googleusercontent.com/-_myMbB-qcn4/Xjz18pQD6xI/AAAAAAAAKj0/FxKjEDmR23UpHBUMrCGGlB5X4XE8D8MIACEwYBhgLKtQDAL1OcqyB5BmmWWCPjwm4peqsMI59Xrep529fBLVC97E5jA2KN3tCnxw2r9zYP0ABD6ChHo7VjUndXDqmyTOTp1upkvAciSWCUbGnTU_7VHsljFFwHkk0azJDCPHwPgtlvQQuWFpSlAXhyh6oUvexPDoQ3xD85m3BTP7AkFkXk46IhUgAYUzRzodddcrNAnee7yRWGJ9n2TgnP9WOJT5diV3VzbqsnCZMRhiRbZErQCk31K97J9Tgmd4K_iQ2QjKZJ3JxBJQH7dBHp5D0bLzAzZIAdhdYmimbzi_fP707R8FW0Dgbuwf3NSkNp9ehTJ-NPKx5K8vObxWZvd6rzgjSb8P-N5oQmJI1Gh86SoqEXAc7hfgdRGMgnw0N8YWzgOyaB4r67txB5Ed9aNPt3OHDDpMJn_af-7zhda4joh-TAGazOWa1SbcHy5xE0CKiq-1x3AnY1WsfhJUzBCk6nPqsVdHtkp0usSxEsjYCGMYDGuEbHO1h8aQ3of7xZEFRu4uQ9QBkQ-Qxrzb-4vfE93ecQNOS7tWnaPjgTmhZakpP6T1n8xHKPTVaHuQrRwXltxmLI_er2nqzVZYprOeRjbMy6vbgDrpb2C0awORwZRpa9JEyXU6cMP27ovcF/w140-h140-p/2020-02-06.jpg'),
+                    backgroundImage: NetworkImage('https://img.favpng.com/23/0/3/computer-icons-user-profile-clip-art-portable-network-graphics-png-favpng-YEj6NsJygkt6nFTNgiXg9fg9w.jpg'),
                   ),
                 ),
                 Column(
