@@ -73,7 +73,7 @@ class _SettingsState extends State<Settings> {
                       padding: const EdgeInsets.only(left: 8.0, bottom: 3.0),
                       //Username
                       child: Text(
-                        username,
+                        username ?? 'user',
                         style: TextStyle(
                           fontSize: 18.0,
                         ),

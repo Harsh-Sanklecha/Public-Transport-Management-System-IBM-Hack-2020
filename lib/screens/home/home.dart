@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
 
                   // Welcome text 
                   Text(
-                    "Welcome, ",
+                    "Welcome,",
                     style: TextStyle(
                       fontFamily: "lobster",
                       color:Colors.white,
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: Text(
-                      username,
+                      username ?? "user", // If the user returns null it replaces the name with "user"
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22.0,
