@@ -111,7 +111,10 @@ class _ScheduledetailState extends State<Scheduledetail> {
 
     busNo = widget.schedule.data['bus-no'];
     route = widget.schedule.data['route'];
-  
+    var list = widget.schedule.data['time-seats'].keys.toString();
+    print(list);
+
+    
 
     return Scaffold(
       appBar: AppBar(
