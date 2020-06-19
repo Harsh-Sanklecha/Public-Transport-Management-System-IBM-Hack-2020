@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Scheduledetail extends StatefulWidget {
+
+  final DocumentSnapshot schedule;
+  Scheduledetail({this.schedule});
 
   @override
   _ScheduledetailState createState() => _ScheduledetailState();
@@ -12,6 +16,7 @@ class _ScheduledetailState extends State<Scheduledetail> {
   var _destination = ['SEC','PATNY','BATA','BH','...'];
   var currentSource = 'SEC';
   var currentDestination = 'SEC';
+  String busNo;
 
   @override
   Widget build(BuildContext context) {
@@ -101,12 +106,12 @@ class _ScheduledetailState extends State<Scheduledetail> {
       ),
     );
   }
-
+busNo = widget.schedule.data['bus-no'];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Hexcolor('#083b66'),
-        title: Text("Schedule for 8A"),
+        title: Text("Schedule for $busNo"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

@@ -1,6 +1,7 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/screens/home/scheduledetail.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,13 +11,27 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   String username;
+  String busno;
+  String busroute;
+  Future _data;
 
+// Function to get data about bus from databse(Firestore)
+  Future getBusDetails() async{
+    var db = Firestore.instance;
+    QuerySnapshot data = await db.collection("bus").getDocuments();
+    return data.documents;
+  }
+
+navigateToSchedule(DocumentSnapshot schedule){
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Scheduledetail(schedule: schedule,)));
+}
   @override
 
   // TO DO --> Connect with firestore instead of firebase
 
   void initState(){
     super.initState();
+    _data = getBusDetails();
     FirebaseAuth.instance.currentUser().then((user){
       // print(Firestore.instance.collection('/user').document(user.uid).snapshots());
       setState(() {
@@ -37,14 +52,34 @@ class _HomeState extends State<Home> {
       showModalBottomSheet(context: context, builder: (context){
         return Container(
           padding: EdgeInsets.all(8.0),
-          child: ListView(
-            children: <Widget>[
-              //Objects calling the cardetail class
-              _Cardetails(busNo: "8A", route: "SEC - AFG",),
-              _Cardetails(busNo: "40", route: "SEC - KOTI",),
-              _Cardetails(busNo: "5K", route: "SEC - MDP",),
-            ],
-          ),
+          
+          child: FutureBuilder(
+            future: _data,
+            builder: (_,snapshot){
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return Center(child: Text("Getting data..."),);
+            }
+            else{
+
+              //List Builder for showing lists
+              return ListView.builder( 
+                itemCount: snapshot.data.length,
+                itemBuilder: (_,index){
+
+                  busno = snapshot.data[index].data['bus-no']; // getting bus number from firestore
+                  busroute =snapshot.data[index].data['route']; // getting bus route from firestore
+
+                  return _Cardetails(
+                    busNo: busno,
+                    route: busroute,
+                    pressed: (){
+                      navigateToSchedule(snapshot.data[index]);
+                    },
+                  );
+                },
+              );
+            }
+          }),
         );
       });
     }
@@ -109,36 +144,39 @@ class _HomeState extends State<Home> {
                       children: <Widget>[
 
                         // TO DO --> Convert into a class
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [BoxShadow(offset: Offset(0,17),
-                              blurRadius: 17,
-                              spreadRadius: -23,
-                              color: Colors.grey[700],
-                            )],
-                          ),
-                          child: Material(
-                            child: InkWell(
-                              onTap: (){
-                                _showSettingsPanel(); // On tap calls the function written globally before scaffold
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Image.asset(
-                                    'assets/bus.png', // Bus/Train/Metro SVG's
-                                    height: 170.0,
-                                    ),
-                                  Text(
-                                    "BUS SCHEDULES",
-                                    style: TextStyle(
-                                      fontFamily: 'cabin',
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    ),
-                                ],
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(18),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [BoxShadow(offset: Offset(0,17),
+                                blurRadius: 17,
+                                spreadRadius: -23,
+                                color: Colors.grey[700],
+                              )],
+                            ),
+                            child: Material(
+                              child: InkWell(
+                                onTap: (){
+                                  _showSettingsPanel(); // On tap calls the function written globally before scaffold
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Image.asset(
+                                      'assets/bus.png', // Bus/Train/Metro SVG's
+                                      height: 170.0,
+                                      ),
+                                    Text(
+                                      "BUS SCHEDULES",
+                                      style: TextStyle(
+                                        fontFamily: 'cabin',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -230,48 +268,50 @@ class _HomeState extends State<Home> {
 class _Cardetails extends StatelessWidget {
    final String route;
    final String busNo;
+   final Function pressed;
+
   const _Cardetails({
     Key key,
     this.busNo,
     this.route,
+    this.pressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0,
-      child: InkWell(
-        onTap: (){
-          Navigator.pushNamed(context, '/schedule');
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    busNo,
-                    style: TextStyle(
-                      color: Colors.grey[800],
-                      fontFamily: 'cabin',
-                      fontSize: 18.0,
+        elevation: 0,
+        child: InkWell(
+          onTap: pressed,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      busNo,
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontFamily: 'cabin',
+                        fontSize: 18.0,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Route: $route",
-                    style: TextStyle(
-                      fontFamily: 'cabin',
-                      fontSize: 14.0,
-                      color: Colors.grey,
+                    Text(
+                      "Route: $route",
+                      style: TextStyle(
+                        fontFamily: 'cabin',
+                        fontSize: 14.0,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Icon(Icons.keyboard_arrow_right),
-            ],
+                  ],
+                ),
+                Icon(Icons.keyboard_arrow_right),
+              ],
+            ),
           ),
         ),
       ),
