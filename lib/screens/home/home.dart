@@ -144,39 +144,36 @@ navigateToSchedule(DocumentSnapshot schedule){
                       children: <Widget>[
 
                         // TO DO --> Convert into a class
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(18),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [BoxShadow(offset: Offset(0,17),
-                                blurRadius: 17,
-                                spreadRadius: -23,
-                                color: Colors.grey[700],
-                              )],
-                            ),
-                            child: Material(
-                              child: InkWell(
-                                onTap: (){
-                                  _showSettingsPanel(); // On tap calls the function written globally before scaffold
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Image.asset(
-                                      'assets/bus.png', // Bus/Train/Metro SVG's
-                                      height: 170.0,
-                                      ),
-                                    Text(
-                                      "BUS SCHEDULES",
-                                      style: TextStyle(
-                                        fontFamily: 'cabin',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                      ),
-                                  ],
-                                ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [BoxShadow(offset: Offset(0,17),
+                              blurRadius: 17,
+                              spreadRadius: -23,
+                              color: Colors.grey[700],
+                            )],
+                          ),
+                          child: Material(
+                            child: InkWell(
+                              onTap: (){
+                                _showSettingsPanel(); // On tap calls the function written globally before scaffold
+                              },
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Image.asset(
+                                    'assets/bus.png', // Bus/Train/Metro SVG's
+                                    height: 170.0,
+                                    ),
+                                  Text(
+                                    "BUS SCHEDULES",
+                                    style: TextStyle(
+                                      fontFamily: 'cabin',
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    ),
+                                ],
                               ),
                             ),
                           ),
@@ -280,38 +277,37 @@ class _Cardetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 0,
-        child: InkWell(
-          onTap: pressed,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      busNo,
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontFamily: 'cabin',
-                        fontSize: 18.0,
-                      ),
+      elevation: 0,
+      child: InkWell(
+        onTap: pressed,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    busNo,
+                    style: TextStyle(
+                      color: Colors.grey[800],
+                      fontFamily: 'cabin',
+                      fontSize: 18.0,
                     ),
-                    Text(
-                      "Route: $route",
-                      style: TextStyle(
-                        fontFamily: 'cabin',
-                        fontSize: 14.0,
-                        color: Colors.grey,
-                      ),
+                  ),
+                  Text(
+                    "Route: $route",
+                    style: TextStyle(
+                      fontFamily: 'cabin',
+                      fontSize: 14.0,
+                      color: Colors.grey,
                     ),
-                  ],
-                ),
-                Icon(Icons.keyboard_arrow_right),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              Icon(Icons.keyboard_arrow_right),
+            ],
           ),
         ),
       ),
