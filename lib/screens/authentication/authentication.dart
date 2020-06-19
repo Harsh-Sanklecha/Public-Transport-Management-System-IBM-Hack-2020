@@ -20,7 +20,7 @@ class _AuthenticateState extends State<Authenticate> {
       body: Center(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 100.0),
+            // SizedBox(height: 100.0),
             
             // Head Logo
             Transform.scale(
