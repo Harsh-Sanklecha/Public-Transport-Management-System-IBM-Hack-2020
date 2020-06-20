@@ -33,7 +33,7 @@ class _SettingsState extends State<Settings> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(
           "Settings",

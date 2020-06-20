@@ -57,6 +57,7 @@ class _HomeState extends State<Home> {
           context: context,
           builder: (context) {
             return Container(
+              height: 500.0,
               padding: EdgeInsets.all(8.0),
               child: FutureBuilder(
                   future: _data,
@@ -67,22 +68,35 @@ class _HomeState extends State<Home> {
                       );
                     } else {
                       //List Builder for showing lists
-                      return ListView.builder(
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (_, index) {
-                          busno = snapshot.data[index].data[
-                              'bus-no']; // getting bus number from firestore
-                          busroute = snapshot.data[index].data[
-                              'route']; // getting bus route from firestore
+                      return Column(
+                        children: <Widget>[
 
-                          return _Cardetails(
-                            busNo: busno,
-                            route: busroute,
-                            pressed: () {
-                              navigateToSchedule(snapshot.data[index]);
-                            },
-                          );
-                        },
+                          // Karthika's Code Here
+                          TextField(),
+
+                          // End's here
+
+                          SizedBox(height: 20.0),
+                          Container(
+                            height: MediaQuery.of(context).size.height * .46,
+                            child: ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (_, index) {
+                                
+                                busno = snapshot.data[index].data['bus-no']; // getting bus number from firestore
+                                busroute = snapshot.data[index].data['route']; // getting bus route from firestore
+
+                                return _Cardetails(
+                                  busNo: busno,
+                                  route: busroute,
+                                  pressed: () {
+                                    navigateToSchedule(snapshot.data[index]);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       );
                     }
                   }),
@@ -91,6 +105,7 @@ class _HomeState extends State<Home> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Stack(
         children: <Widget>[
           Container(

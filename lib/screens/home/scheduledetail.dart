@@ -111,10 +111,8 @@ class _ScheduledetailState extends State<Scheduledetail> {
 
     busNo = widget.schedule.data['bus-no'];
     route = widget.schedule.data['route'];
-    var list = widget.schedule.data['time-seats'].keys.toString();
-    print(list);
-
-    
+    var time;
+    var list = widget.schedule.data['time-seats'].keys;
 
     return Scaffold(
       appBar: AppBar(
@@ -165,16 +163,8 @@ class _ScheduledetailState extends State<Scheduledetail> {
                   crossAxisCount: 4,
                   children: <Widget>[
                     // Card For each time interval
-                    _buildCard("10:00"),
-                    _buildCard("11:00"),
-                    _buildCard("12:00"),
-                    _buildCard("13:00"),
-                    _buildCard("14:00"),
-                    _buildCard("15:00"),
-                    _buildCard("16:00"),
-                    _buildCard("17:00"),
-                    _buildCard("18:00"),
-                    _buildCard("19:00"),
+                    for (time in list)
+                    _buildCard(time),
                   ],
                 ),
               ),
