@@ -1,0 +1,126 @@
+Index: .vscode/launch.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .vscode/launch.json	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
++++ .vscode/launch.json	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
+@@ -0,0 +1,13 @@
++{
++    // Use IntelliSense to learn about possible attributes.
++    // Hover to view descriptions of existing attributes.
++    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
++    "version": "0.2.0",
++    "configurations": [
++        {
++            "name": "Flutter",
++            "request": "launch",
++            "type": "dart"
++        }
++    ]
++}
+\ No newline at end of file
+Index: lib/main.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/main.dart	(revision 61e025604f93095abe71fc87ddba255af550f972)
++++ lib/main.dart	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
+@@ -4,6 +4,7 @@
+ import 'package:flutterapp/screens/authentication/logic.dart';
+ import 'package:flutterapp/screens/authentication/login.dart';
+ import 'package:flutterapp/screens/authentication/signup.dart';
++import 'package:flutterapp/screens/home/bluetooth.dart';
+ import 'package:flutterapp/screens/home/busview.dart';
+ import 'package:flutterapp/screens/home/scheduledetail.dart';
+ import 'package:flutterapp/screens/home/seatselect.dart';
+@@ -32,6 +33,7 @@
+           '/busview': (context) => BusView(), // to be removed later
+           '/schedule': (context) => Scheduledetail(),
+           '/seatselect': (context) => SeatSelect(),
++          '/bluetooth': (context) => Bluetooth(),
+         },
+       ),
+     );
+Index: lib/screens/authentication/authentication.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screens/authentication/authentication.dart	(revision 61e025604f93095abe71fc87ddba255af550f972)
++++ lib/screens/authentication/authentication.dart	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
+@@ -20,7 +20,7 @@
+       body: Center(
+         child: Column(
+           children: <Widget>[
+-            SizedBox(height: 100.0),
++            // SizedBox(height: 100.0),
+             
+             // Head Logo
+             Transform.scale(
+Index: lib/screens/home/bluetooth.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screens/home/bluetooth.dart	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
++++ lib/screens/home/bluetooth.dart	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
+@@ -0,0 +1,10 @@
++import 'package:flutter/material.dart';
++
++class Bluetooth extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++    return Scaffold(
++      
++    );
++  }
++}
+\ No newline at end of file
+Index: lib/screens/home/seatselect.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screens/home/seatselect.dart	(revision 61e025604f93095abe71fc87ddba255af550f972)
++++ lib/screens/home/seatselect.dart	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
+@@ -4,6 +4,7 @@
+   @override
+   Widget build(BuildContext context) {
+     return Scaffold(
++      //Code Here
+       body: Center(child: Text("TODO --> SEAT SELECTION MODEL"))
+     );
+   }
+Index: lib/screens/home/settings.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screens/home/settings.dart	(revision 61e025604f93095abe71fc87ddba255af550f972)
++++ lib/screens/home/settings.dart	(revision 926707378ecb33ca1a86dc287f4a21b06f03cde9)
+@@ -91,9 +91,9 @@
+           ),
+           SizedBox(height: 30.0),
+           Container(
+-            height: MediaQuery.of(context).size.height-500,
++            height: MediaQuery.of(context).size.height * .40,
+             child: ListView(
+-              physics:  NeverScrollableScrollPhysics(), // List to be non-scrollable
++              // physics:  NeverScrollableScrollPhysics(), // List to be non-scrollable
+               children: <Widget>[
+                 Card(
+                   child: InkWell(
+@@ -210,6 +210,11 @@
+               ],
+             ),
+           ),
++          FlatButton(
++            color: Colors.pinkAccent,
++            onPressed: (){
++              Navigator.pushNamed(context, '/bluetooth');
++          }, child: Text("Aashray ka code"))
+         ],
+       ),
+     );
