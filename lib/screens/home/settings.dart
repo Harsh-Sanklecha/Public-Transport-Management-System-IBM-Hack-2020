@@ -91,9 +91,9 @@ class _SettingsState extends State<Settings> {
           ),
           SizedBox(height: 30.0),
           Container(
-            height: MediaQuery.of(context).size.height-500,
+            height: MediaQuery.of(context).size.height * .40,
             child: ListView(
-              physics:  NeverScrollableScrollPhysics(), // List to be non-scrollable
+              // physics:  NeverScrollableScrollPhysics(), // List to be non-scrollable
               children: <Widget>[
                 Card(
                   child: InkWell(
@@ -210,6 +210,11 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
+          FlatButton(
+            color: Colors.pinkAccent,
+            onPressed: (){
+              Navigator.pushNamed(context, '/bluetooth');
+          }, child: Text("Aashray ka code"))
         ],
       ),
     );

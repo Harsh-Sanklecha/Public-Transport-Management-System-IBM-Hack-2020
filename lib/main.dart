@@ -4,6 +4,7 @@ import 'package:flutterapp/screens/authentication/authentication.dart';
 import 'package:flutterapp/screens/authentication/logic.dart';
 import 'package:flutterapp/screens/authentication/login.dart';
 import 'package:flutterapp/screens/authentication/signup.dart';
+import 'package:flutterapp/screens/home/bluetooth.dart';
 import 'package:flutterapp/screens/home/busview.dart';
 import 'package:flutterapp/screens/home/scheduledetail.dart';
 import 'package:flutterapp/screens/home/seatselect.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           '/busview': (context) => BusView(), // to be removed later
           '/schedule': (context) => Scheduledetail(),
           '/seatselect': (context) => SeatSelect(),
+          '/bluetooth': (context) => Bluetooth(),
         },
       ),
     );
