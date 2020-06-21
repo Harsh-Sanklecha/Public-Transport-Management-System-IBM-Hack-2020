@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/screens/home/scheduledetail.dart';
+import 'package:flutterapp/Search.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,6 +14,39 @@ class _HomeState extends State<Home> {
   String busno;
   String busroute;
   Future _data; 
+  var queryResult=[];
+  var tempSearchStore=[];
+
+  initiateSearch(val){
+    if(val.length==0){
+      setState ((){
+      queryResult=[];
+      tempSearchStore=[];
+      });
+    }
+    var capitalizedValue=
+    val.substring(0,1).toUpperCase() + val.substring(1);
+
+    if((queryResult.length==0 )&& (val.length==1)){
+      Search().searchByName(val).then((QuerySnapshot docs){
+       for(int i=0;i<docs.documents.length;i++){
+         queryResult.add(docs.documents[i].data);
+       }
+      });
+
+    }
+    else{
+      tempSearchStore =[];
+      queryResult.forEach((element){
+        if(element['BusinessName'].startsWith(capitalizedValue)){
+          setState((){
+            tempSearchStore.add(element);
+
+          });
+        }
+      });
+    }
+  }
 
 // Function to get data about bus from databse(Firestore)
   Future getBusDetails() async {
@@ -71,8 +105,33 @@ class _HomeState extends State<Home> {
                       return Column(
                         children: <Widget>[
 
+
+                          Padding(
+                           padding:const EdgeInsets.all(10),
+                           child: TextField(
+                             onChanged:(val) {
+                               initiateSearch(val);
+                             },
+                             decoration:InputDecoration(
+                               prefixIcon: IconButton(
+                                 color: Colors.black,
+                                   icon: Icon(Icons.arrow_back),
+                                   iconSize: 20.0,
+                                   onPressed: () {
+                                     Navigator.of(context).pop();
+                                   },
+                               ),
+                               contentPadding: EdgeInsets.only(left:25.0),
+                               hintText: 'Search By Name',
+                               border:OutlineInputBorder(
+                                 borderRadius: BorderRadius.circular(4.0))),
+                               
+                             ),
+                         ),
+                        
+
                           // Karthika's Code Here
-                          TextField(),
+                          
 
                           // End's here
 
