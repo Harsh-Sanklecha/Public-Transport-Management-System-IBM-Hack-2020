@@ -12,6 +12,7 @@ class _SettingsState extends State<Settings> {
   final AuthService _auth = AuthService();
   String username;
   String uid;
+  String profile;
 
   @override
 
@@ -24,6 +25,7 @@ class _SettingsState extends State<Settings> {
       setState(() {
         username = user.displayName;
         uid = user.uid;
+        profile = user.photoUrl;
       });
 
     }).catchError((e){
@@ -63,7 +65,7 @@ class _SettingsState extends State<Settings> {
                   child: CircleAvatar( 
                     radius: 30.0,
                     backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage('https://img.favpng.com/23/0/3/computer-icons-user-profile-clip-art-portable-network-graphics-png-favpng-YEj6NsJygkt6nFTNgiXg9fg9w.jpg'),
+                    backgroundImage: NetworkImage(profile ?? 'https://img.favpng.com/23/0/3/computer-icons-user-profile-clip-art-portable-network-graphics-png-favpng-YEj6NsJygkt6nFTNgiXg9fg9w.jpg'),
                   ),
                 ),
                 Column(
@@ -91,7 +93,7 @@ class _SettingsState extends State<Settings> {
           ),
           SizedBox(height: 30.0),
           Container(
-            height: MediaQuery.of(context).size.height * .40,
+            height: MediaQuery.of(context).size.height * .50,
             child: ListView(
               // physics:  NeverScrollableScrollPhysics(), // List to be non-scrollable
               children: <Widget>[

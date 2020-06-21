@@ -27,7 +27,7 @@ class AuthService {
         updateUserData(user);
         if(user == null)
           return false;
-        return user;
+        return true;
       } catch (e) {
         print(e.message);
         print("Error logging with google");
@@ -41,6 +41,7 @@ class AuthService {
       return ref.setData({
         'uid': user.uid,
         'name': user.displayName,
+        'profile': user.photoUrl,
       });
 }
 
