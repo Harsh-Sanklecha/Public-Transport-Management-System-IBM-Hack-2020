@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/screens/home/scheduledetail.dart';
-import 'package:flutterapp/Search.dart';
+//import 'package:flutterapp/Search.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,39 +14,9 @@ class _HomeState extends State<Home> {
   String busno;
   String busroute;
   Future _data; 
-  var queryResult=[];
-  var tempSearchStore=[];
+  
 
-  initiateSearch(val){
-    if(val.length==0){
-      setState ((){
-      queryResult=[];
-      tempSearchStore=[];
-      });
-    }
-    var capitalizedValue=
-    val.substring(0,1).toUpperCase() + val.substring(1);
-
-    if((queryResult.length==0 )&& (val.length==1)){
-      Search().searchByName(val).then((QuerySnapshot docs){
-       for(int i=0;i<docs.documents.length;i++){
-         queryResult.add(docs.documents[i].data);
-       }
-      });
-
-    }
-    else{
-      tempSearchStore =[];
-      queryResult.forEach((element){
-        if(element['BusinessName'].startsWith(capitalizedValue)){
-          setState((){
-            tempSearchStore.add(element);
-
-          });
-        }
-      });
-    }
-  }
+  
 
 // Function to get data about bus from databse(Firestore)
   Future getBusDetails() async {
@@ -83,11 +53,50 @@ class _HomeState extends State<Home> {
   }
 
   Widget build(BuildContext context) {
+
+    
     var size = MediaQuery.of(context).size;
 
+   
     //Bottom Sheet with bus details
     void _showSettingsPanel() {
+      var queryResult=[];
+        var tempSearchStore=[];
+
+     initiateSearch(val){
+     if(val.length==0){
+      setState ((){
+      queryResult=[];
+      tempSearchStore=[];
+      });
+     }
+     var capitalizedValue=
+     val.substring(0,1).toString() + val.substring(1);
+
+     if((queryResult.length==0 )&& (val.length==1)){
+       //Firestore.instance.collection('bus');
+      Search().searchByName(val).then((QuerySnapshot docs){
+       for(int i=0;i<docs.documents.length;i++){
+         queryResult.add(docs.documents[i].data);
+       }
+      });
+
+     }
+     else{
+      tempSearchStore =[];
+      queryResult.forEach((element){
+        if(element['BusinessName'].startsWith(capitalizedValue)){
+          setState((){
+            tempSearchStore.add(element);
+
+          });
+        }
+      });
+     }
+     }
+       
       showModalBottomSheet(
+        
           context: context,
           builder: (context) {
             return Container(
@@ -104,9 +113,8 @@ class _HomeState extends State<Home> {
                       //List Builder for showing lists
                       return Column(
                         children: <Widget>[
-
-
-                          Padding(
+                          
+                           Padding(
                            padding:const EdgeInsets.all(10),
                            child: TextField(
                              onChanged:(val) {
@@ -366,6 +374,7 @@ class _Cardetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Card(
       elevation: 0,
       child: InkWell(
@@ -403,4 +412,16 @@ class _Cardetails extends StatelessWidget {
       ),
     );
   }
+}
+//import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Search{
+
+  searchByName(String searchField){
+
+    return Firestore.instance.collection('Client')
+    .where('SearchKey', isEqualTo: searchField.substring(0,1).toString() )
+    .getDocuments();
+  }
+
 }
