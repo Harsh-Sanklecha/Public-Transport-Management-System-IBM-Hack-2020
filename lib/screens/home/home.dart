@@ -251,7 +251,7 @@ class _HomeState extends State<Home> {
                                 children: <Widget>[
                                   Image.asset(
                                     'assets/bus.png', // Bus/Train/Metro SVG's
-                                    height: 170.0,
+                                    height: 160.0,
                                   ),
                                   Text(
                                     "BUS SCHEDULES",
