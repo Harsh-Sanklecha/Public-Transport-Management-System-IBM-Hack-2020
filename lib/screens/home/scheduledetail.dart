@@ -18,6 +18,10 @@ class _ScheduledetailState extends State<Scheduledetail> {
   String currentDestination;
   String busNo;
   String route;
+  Color seatColor;
+  Color avaiable = Hexcolor("#00cc00");
+  Color fastfilling = Hexcolor("#ff9900");
+  Color full = Hexcolor("#cc0000");
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,16 @@ class _ScheduledetailState extends State<Scheduledetail> {
 
     // Card widget class
 
-    Card _buildCard(String time) {
+    Card _buildCard(var time, var seats) {
+      if(seats  >= 10){
+        seatColor = avaiable;
+      }
+      if (seats < 10){
+        seatColor = fastfilling;
+      }
+      if(seats == 0){
+        seatColor = full;
+      }
       return Card(
         color: Colors.white,
         child: InkWell(
@@ -57,7 +70,7 @@ class _ScheduledetailState extends State<Scheduledetail> {
             child: Text(
               time,
               style: TextStyle(
-                color: Colors.greenAccent[700],
+                color: seatColor,
               ),
             ),
           ),
@@ -67,8 +80,14 @@ class _ScheduledetailState extends State<Scheduledetail> {
 
     busNo = widget.schedule.data['bus-no'];
     route = widget.schedule.data['route'];
-    var time;
-    var list = widget.schedule.data['time-seats'].keys;
+    var list = widget.schedule.data['time-seats'];
+    var slot = list.keys.toList();
+    var seats = list.values.toList();
+    print(seats);
+    for (var temp = 0; temp < list.length; temp++) {
+      print(slot[temp]);
+      print(seats[temp]);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -119,7 +138,8 @@ class _ScheduledetailState extends State<Scheduledetail> {
                   crossAxisCount: 4,
                   children: <Widget>[
                     // Card For each time interval
-                    for (time in list) _buildCard(time),
+                    for (var temp = 0; temp < list.length; temp ++)
+                      _buildCard(slot[temp], seats[temp]),
                   ],
                 ),
               ),

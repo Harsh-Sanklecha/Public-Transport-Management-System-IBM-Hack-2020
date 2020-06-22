@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
      val.substring(0,1).toString() + val.substring(1);
 
      if((queryResult.length==0 )&& (val.length==1)){
-       //Firestore.instance.collection('bus');
+       Firestore.instance.collection('bus');
       Search().searchByName(val).then((QuerySnapshot docs){
        for(int i=0;i<docs.documents.length;i++){
          queryResult.add(docs.documents[i].data);
@@ -85,10 +85,9 @@ class _HomeState extends State<Home> {
      else{
       tempSearchStore =[];
       queryResult.forEach((element){
-        if(element['BusinessName'].startsWith(capitalizedValue)){
+        if(element['bus-no'].startsWith(capitalizedValue)){
           setState((){
             tempSearchStore.add(element);
-
           });
         }
       });
@@ -113,7 +112,6 @@ class _HomeState extends State<Home> {
                       //List Builder for showing lists
                       return Column(
                         children: <Widget>[
-                          
                            Padding(
                            padding:const EdgeInsets.all(10),
                            child: TextField(
@@ -122,7 +120,7 @@ class _HomeState extends State<Home> {
                              },
                              decoration:InputDecoration(
                                prefixIcon: IconButton(
-                                 color: Colors.black,
+                                 color: Colors.grey[600],
                                    icon: Icon(Icons.arrow_back),
                                    iconSize: 20.0,
                                    onPressed: () {
@@ -130,7 +128,7 @@ class _HomeState extends State<Home> {
                                    },
                                ),
                                contentPadding: EdgeInsets.only(left:25.0),
-                               hintText: 'Search By Name',
+                               hintText: 'Search By Bus',
                                border:OutlineInputBorder(
                                  borderRadius: BorderRadius.circular(4.0))),
                                
@@ -142,8 +140,6 @@ class _HomeState extends State<Home> {
                           
 
                           // End's here
-
-                          SizedBox(height: 20.0),
                           Container(
                             height: MediaQuery.of(context).size.height * .46,
                             child: ListView.builder(
@@ -413,14 +409,13 @@ class _Cardetails extends StatelessWidget {
     );
   }
 }
-//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Search{
 
   searchByName(String searchField){
 
-    return Firestore.instance.collection('Client')
-    .where('SearchKey', isEqualTo: searchField.substring(0,1).toString() )
+    return Firestore.instance.collection('bus')
+    .where('Searchkey', isEqualTo: searchField.substring(0,1).toString() )
     .getDocuments();
   }
 
