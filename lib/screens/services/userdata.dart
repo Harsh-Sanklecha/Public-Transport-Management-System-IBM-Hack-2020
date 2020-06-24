@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 // Custom class for storing user data in database(Firestore)
+
 class UserData{
 
   final Firestore _db = Firestore.instance;

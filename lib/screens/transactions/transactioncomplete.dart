@@ -99,7 +99,7 @@ class _TransactionCompleteState extends State<TransactionComplete> {
                   child: Column(
                     children: <Widget>[
                       ticketDetailsWidget(
-                          'Passenger', username, 'Date', '24-12-2018'),
+                          'Passenger', username ?? 'user', 'Date', '24-12-2018'),
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0, right: 35.0),
                         child: ticketDetailsWidget(

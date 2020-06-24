@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutterapp/screens/services/transactionstore.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Bottomsheetform extends StatefulWidget {
@@ -23,13 +25,28 @@ class Bottomsheetform extends StatefulWidget {
 
 class _BottomsheetformState extends State<Bottomsheetform> {
 
-  @override
-  Widget build(BuildContext context) {
+  String uid;
+  String username;
 
-  String currentSource = widget.currSource;
-  String currentDestination = widget.currDest;
-  var size = MediaQuery.of(context).size;
-  
+  @override
+
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((user) {
+      // print(Firestore.instance.collection('/user').document(user.uid).snapshots());
+      setState(() {
+        username = user.displayName;
+        uid = user.uid;
+      });
+    }).catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  Widget build(BuildContext context) {
+    String currentSource = widget.currSource;
+    String currentDestination = widget.currDest;
+    var size = MediaQuery.of(context).size;
 
     return Container(
       height: size.height * .30,
@@ -45,16 +62,14 @@ class _BottomsheetformState extends State<Bottomsheetform> {
                 fontSize: 18.0,
                 color: Hexcolor('#01233f'),
               ),
-              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 50.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-
                   // DropDown Menu for Source
                   DropdownButton(
-                    elevation: 0,
                     value: currentSource,
                     // hint: Text("SOURCE"),
                     items: widget.source.map((_sources) {
@@ -94,13 +109,22 @@ class _BottomsheetformState extends State<Bottomsheetform> {
               child: FlatButton(
                 color: Hexcolor('#083b66'),
                 onPressed: () {
+                  TransactionStore(
+                    uid: uid,
+                    username: username,
+                    time: widget.time,
+                    source: widget.currSource,
+                    destination: widget.currDest,
+                    busNo: widget.busNo,
+                  ).storingTransactions();
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, '/transactioncomplete', arguments: {
-                    'time': widget.time,
-                    'source': widget.currSource,
-                    'destination': widget.currDest,
-                    'busNo': widget.busNo,
-                  });
+                  Navigator.pushNamed(context, '/transactioncomplete',
+                      arguments: {
+                        'time': widget.time,
+                        'source': widget.currSource,
+                        'destination': widget.currDest,
+                        'busNo': widget.busNo,
+                      });
                 },
                 child: Text(
                   "Proceed",
@@ -108,7 +132,7 @@ class _BottomsheetformState extends State<Bottomsheetform> {
                     color: Colors.white,
                     fontFamily: 'cabin',
                     fontSize: 17.0,
-                    ),
+                  ),
                 ),
               ),
             ),
