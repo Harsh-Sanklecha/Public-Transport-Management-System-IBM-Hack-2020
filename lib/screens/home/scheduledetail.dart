@@ -44,6 +44,7 @@ class _ScheduledetailState extends State<Scheduledetail> {
               destination: _destination,
               currSource: currentSource,
               currDest: currentDestination,
+              busNo: busNo,
             );
           });
     }
@@ -83,11 +84,6 @@ class _ScheduledetailState extends State<Scheduledetail> {
     var list = widget.schedule.data['time-seats'];
     var slot = list.keys.toList();
     var seats = list.values.toList();
-    print(seats);
-    for (var temp = 0; temp < list.length; temp++) {
-      print(slot[temp]);
-      print(seats[temp]);
-    }
 
     return Scaffold(
       appBar: AppBar(

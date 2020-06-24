@@ -14,13 +14,16 @@ class _AuthenticateState extends State<Authenticate> {
 
   @override
   Widget build(BuildContext context) {
+
+  var size = MediaQuery.of(context).size;
+
     return loading ? Loading() : Scaffold(
       resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: false,
       body: Center(
         child: Column(
           children: <Widget>[
-            // SizedBox(height: 100.0),
+            SizedBox(height: size.height * 0.17),
             
             // Head Logo
             Transform.scale(
