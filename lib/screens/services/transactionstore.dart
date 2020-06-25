@@ -26,10 +26,10 @@ class TransactionStore {
     var tID = rnd.nextInt(99999999);
 
     DocumentReference ref = db
-        .collection('/user')
-        .document(uid)
-        .collection('transactions')
-        .document(tID.toString());
+      .collection('/user')
+      .document(uid)
+      .collection('transactions')
+      .document(tID.toString());
     return ref.setData({
       'username' : username,
       'time': time,

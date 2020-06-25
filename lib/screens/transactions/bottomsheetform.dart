@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterapp/screens/services/transactionstore.dart';
+import 'package:flutterapp/screens/transactions/decreasingseats.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Bottomsheetform extends StatefulWidget {
@@ -8,6 +9,7 @@ class Bottomsheetform extends StatefulWidget {
   String currSource;
   String currDest;
   final String busNo;
+  final String docID;
   final List<String> source;
   final List<String> destination;
 
@@ -18,6 +20,7 @@ class Bottomsheetform extends StatefulWidget {
     this.currSource,
     this.currDest,
     this.busNo,
+    this.docID,
   });
   @override
   _BottomsheetformState createState() => _BottomsheetformState();
@@ -117,6 +120,7 @@ class _BottomsheetformState extends State<Bottomsheetform> {
                     destination: widget.currDest,
                     busNo: widget.busNo,
                   ).storingTransactions();
+                  DecreasingNumberOfSeats(docID: widget.docID).decrement();
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/transactioncomplete',
                       arguments: {

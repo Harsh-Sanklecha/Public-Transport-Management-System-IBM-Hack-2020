@@ -23,8 +23,15 @@ class _ScheduledetailState extends State<Scheduledetail> {
   Color fastfilling = Hexcolor("#ff9900");
   Color full = Hexcolor("#cc0000");
 
+
   @override
+
   Widget build(BuildContext context) {
+
+
+    String docID = widget.schedule.documentID; //To get the present document ID
+
+
     // Bottom Sheet with source and destination details
     void _showSettingsPanel(String time) {
       showModalBottomSheet(
@@ -45,6 +52,7 @@ class _ScheduledetailState extends State<Scheduledetail> {
               currSource: currentSource,
               currDest: currentDestination,
               busNo: busNo,
+              docID: docID,
             );
           });
     }
