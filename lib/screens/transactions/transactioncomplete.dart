@@ -1,15 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_ticket_widget/flutter_ticket_widget.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
 
 class TransactionComplete extends StatefulWidget {
   @override
   _TransactionCompleteState createState() => _TransactionCompleteState();
+  
 }
 class _TransactionCompleteState extends State<TransactionComplete> {
 
   String username;  
+  String uid; 
+  String qrData ="tID";
   Map data = {};
+   
 
   @override
     void initState() {
@@ -18,15 +26,19 @@ class _TransactionCompleteState extends State<TransactionComplete> {
       // print(Firestore.instance.collection('/user').document(user.uid).snapshots());
       setState(() {
         username = user.displayName;
+        uid = user.uid;
       });
     }).catchError((e) {
       print(e.toString());
     });
+
+    Firestore.instance.collection('user').document(uid).collection('transaction').document().snapshots();
   }
 
   Widget build(BuildContext context) {
 
   data = ModalRoute.of(context).settings.arguments;
+ 
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -108,18 +120,45 @@ class _TransactionCompleteState extends State<TransactionComplete> {
                     ],
                   ),
                 ),
-                
-                Padding(
-                  padding: const EdgeInsets.only(top: 60.0, left: 70.0, right: 30.0),
-                  child: Container(
-                    width: 150.0,
-                    height: 150.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/qr-code.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                ),
+                 
+
+                 Padding (
+                  padding: const EdgeInsets.only(top: 40.0, left: 60.0, right: 60.0) ,
+                      child:Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                         crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            QrImage(data:qrData),
+                              SizedBox(height:10.0),
+                                 Text("Data here"),
+                                   SizedBox(
+              height: 10.0,
+            ),
+            FlatButton(
+              padding: EdgeInsets.all(15.0),
+              child:Text("Generate QR code"),
+              onPressed: () { 
+
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius:BorderRadius.circular(20.0),
+                // side:BorderSide(colors:Colors.blue,width:3.0),
+              ),
+            ),
+          ],
+        ),
+       ),
+               // Padding(
+                 // padding: const EdgeInsets.only(top: 60.0, left: 70.0, right: 30.0),
+                  //child: Container(
+                    //width: 150.0,
+                    //height: 150.0,
+                    //decoration: BoxDecoration(
+                      //  image: DecorationImage(
+                        //    image: AssetImage('assets/qr-code.png'),
+                          //  fit: BoxFit.cover)),
+                  //),
+                //),
                 Padding(
                   padding:
                       const EdgeInsets.only(top: 10.0, left: 75.0, right: 75.0),

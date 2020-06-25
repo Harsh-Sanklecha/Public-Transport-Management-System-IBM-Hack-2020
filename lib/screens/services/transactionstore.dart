@@ -23,7 +23,7 @@ class TransactionStore {
 
   storingTransactions() {
     Random rnd = new Random();
-    var tID = rnd.nextInt(99999999);
+    var tID = rnd.nextInt(6666);
 
     DocumentReference ref = db
         .collection('/user')
