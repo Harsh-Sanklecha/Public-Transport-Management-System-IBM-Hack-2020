@@ -31,11 +31,8 @@ dependencies:
   qr_flutter: ^3.2.0
   flutter_scan_bluetooth: ^1.1.0
   flutter_ticket_widget: ^0.0.1
-<<<<<<< HEAD
   beacon_broadcast: ^0.2.1
-=======
-  
->>>>>>> 36ae9cd7dbccf72afc4579509b9b8c9d65552719
+  flutter_blue: ^0.6.3+1
 
 dev_dependencies:
   flutter_test:
