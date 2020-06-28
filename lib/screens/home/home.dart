@@ -13,10 +13,7 @@ class _HomeState extends State<Home> {
   String username;
   String busno;
   String busroute;
-  Future _data; 
-  
-
-  
+  Future _data;
 
 // Function to get data about bus from databse(Firestore)
   Future getBusDetails() async {
@@ -53,49 +50,43 @@ class _HomeState extends State<Home> {
   }
 
   Widget build(BuildContext context) {
-
-    
     var size = MediaQuery.of(context).size;
 
-   
     //Bottom Sheet with bus details
     void _showSettingsPanel() {
-      var queryResult=[];
-        var tempSearchStore=[];
+      var queryResult = [];
+      var tempSearchStore = [];
 
-     initiateSearch(val){
-     if(val.length==0){
-      setState ((){
-      queryResult=[];
-      tempSearchStore=[];
-      });
-     }
-     var capitalizedValue=
-     val.substring(0,1).toString() + val.substring(1);
-
-     if((queryResult.length==0 )&& (val.length==1)){
-       Firestore.instance.collection('bus');
-      Search().searchByName(val).then((QuerySnapshot docs){
-       for(int i=0;i<docs.documents.length;i++){
-         queryResult.add(docs.documents[i].data);
-       }
-      });
-
-     }
-     else{
-      tempSearchStore =[];
-      queryResult.forEach((element){
-        if(element['bus-no'].startsWith(capitalizedValue)){
-          setState((){
-            tempSearchStore.add(element);
+      initiateSearch(val) {
+        if (val.length == 0) {
+          setState(() {
+            queryResult = [];
+            tempSearchStore = [];
           });
         }
-      });
-     }
-     }
-       
+        var capitalizedValue =
+            val.substring(0, 1).toString() + val.substring(1);
+
+        if ((queryResult.length == 0) && (val.length == 1)) {
+          Firestore.instance.collection('bus');
+          Search().searchByName(val).then((QuerySnapshot docs) {
+            for (int i = 0; i < docs.documents.length; i++) {
+              queryResult.add(docs.documents[i].data);
+            }
+          });
+        } else {
+          tempSearchStore = [];
+          queryResult.forEach((element) {
+            if (element['bus-no'].startsWith(capitalizedValue)) {
+              setState(() {
+                tempSearchStore.add(element);
+              });
+            }
+          });
+        }
+      }
+
       showModalBottomSheet(
-        
           context: context,
           builder: (context) {
             return Container(
@@ -112,42 +103,37 @@ class _HomeState extends State<Home> {
                       //List Builder for showing lists
                       return Column(
                         children: <Widget>[
-                           Padding(
-                           padding:const EdgeInsets.all(10),
-                           child: TextField(
-                             onChanged:(val) {
-                               initiateSearch(val);
-                             },
-                             decoration:InputDecoration(
-                               prefixIcon: IconButton(
-                                 color: Colors.grey[600],
-                                   icon: Icon(Icons.arrow_back),
-                                   iconSize: 20.0,
-                                   onPressed: () {
-                                     Navigator.of(context).pop();
-                                   },
-                               ),
-                               contentPadding: EdgeInsets.only(left:25.0),
-                               hintText: 'Search By Bus',
-                               border:OutlineInputBorder(
-                                 borderRadius: BorderRadius.circular(4.0))),
-                               
-                             ),
-                         ),
-                        
-
-                          // Karthika's Code Here
-                          
-
-                          // End's here
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: TextField(
+                              onChanged: (val) {
+                                initiateSearch(val);
+                              },
+                              decoration: InputDecoration(
+                                  prefixIcon: IconButton(
+                                    color: Colors.grey[600],
+                                    icon: Icon(Icons.arrow_back),
+                                    iconSize: 20.0,
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  contentPadding: EdgeInsets.only(left: 25.0),
+                                  hintText: 'Search By Bus',
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(4.0))),
+                            ),
+                          ),
                           Container(
                             height: MediaQuery.of(context).size.height * .46,
                             child: ListView.builder(
                               itemCount: snapshot.data.length,
                               itemBuilder: (_, index) {
-                                
-                                busno = snapshot.data[index].data['bus-no']; // getting bus number from firestore
-                                busroute = snapshot.data[index].data['route']; // getting bus route from firestore
+                                busno = snapshot.data[index].data[
+                                    'bus-no']; // getting bus number from firestore
+                                busroute = snapshot.data[index].data[
+                                    'route']; // getting bus route from firestore
 
                                 return _Cardetails(
                                   busNo: busno,
@@ -174,7 +160,7 @@ class _HomeState extends State<Home> {
           Container(
             height: size.height * .45,
             decoration:
-                BoxDecoration(color: Colors.teal), //TO DO --> Change Color
+                BoxDecoration(color: Colors.teal[600]), //TO DO --> Change Color
           ),
           SafeArea(
             child: Padding(
@@ -370,7 +356,6 @@ class _Cardetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Card(
       elevation: 0,
       child: InkWell(
@@ -410,13 +395,11 @@ class _Cardetails extends StatelessWidget {
   }
 }
 
-class Search{
-
-  searchByName(String searchField){
-
-    return Firestore.instance.collection('bus')
-    .where('Searchkey', isEqualTo: searchField.substring(0,1).toString() )
-    .getDocuments();
+class Search {
+  searchByName(String searchField) {
+    return Firestore.instance
+        .collection('bus')
+        .where('Searchkey', isEqualTo: searchField.substring(0, 1).toString())
+        .getDocuments();
   }
-
 }

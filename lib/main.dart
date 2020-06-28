@@ -8,6 +8,7 @@ import 'package:flutterapp/screens/home/bluetooth.dart';
 import 'package:flutterapp/screens/home/busview.dart';
 import 'package:flutterapp/screens/home/scheduledetail.dart';
 import 'package:flutterapp/screens/home/settings.dart';
+import 'package:flutterapp/screens/settings/transhistory.dart';
 import 'package:flutterapp/screens/transactions/transactioncomplete.dart';
 import 'package:flutterapp/screens/wrapper.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           '/schedule': (context) => Scheduledetail(),
           '/bluetooth': (context) => Bluetooth(),
           '/transactioncomplete' : (context) => TransactionComplete(),
+          'transactionhistory' : (context) => TransactionHistory(),
         },
       ),
     );

@@ -120,7 +120,8 @@ class _BottomsheetformState extends State<Bottomsheetform> {
                     destination: widget.currDest,
                     busNo: widget.busNo,
                   ).storingTransactions();
-                  DecreasingNumberOfSeats(docID: widget.docID).decrement();
+                  var tID = TransactionStore().getID();
+                  DecreasingNumberOfSeats(docID: widget.docID).decrement(); //Removing seats when transaction completes
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/transactioncomplete',
                       arguments: {
@@ -128,6 +129,7 @@ class _BottomsheetformState extends State<Bottomsheetform> {
                         'source': widget.currSource,
                         'destination': widget.currDest,
                         'busNo': widget.busNo,
+                        'tID': tID,
                       });
                 },
                 child: Text(

@@ -5,22 +5,19 @@ import 'package:flutter_ticket_widget/flutter_ticket_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-
 class TransactionComplete extends StatefulWidget {
   @override
   _TransactionCompleteState createState() => _TransactionCompleteState();
-  
 }
-class _TransactionCompleteState extends State<TransactionComplete> {
 
-  String username;  
-  String uid; 
-  String qrData ="tID";
+class _TransactionCompleteState extends State<TransactionComplete> {
+  String username;
+  String uid;
+  String qrData;
   Map data = {};
-   
 
   @override
-    void initState() {
+  void initState() {
     super.initState();
     FirebaseAuth.instance.currentUser().then((user) {
       // print(Firestore.instance.collection('/user').document(user.uid).snapshots());
@@ -32,13 +29,18 @@ class _TransactionCompleteState extends State<TransactionComplete> {
       print(e.toString());
     });
 
-    Firestore.instance.collection('user').document(uid).collection('transaction').document().snapshots();
+    Firestore.instance
+        .collection('user')
+        .document(uid)
+        .collection('transaction')
+        .document()
+        .snapshots();
   }
 
   Widget build(BuildContext context) {
 
-  data = ModalRoute.of(context).settings.arguments;
- 
+    data = ModalRoute.of(context).settings.arguments;
+    qrData = data['tID'].toString();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -110,8 +112,11 @@ class _TransactionCompleteState extends State<TransactionComplete> {
                   padding: const EdgeInsets.only(top: 25.0),
                   child: Column(
                     children: <Widget>[
-                      ticketDetailsWidget(
-                          'Passenger', username ?? 'user', 'Date', '24-12-2018'),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 25.0),
+                        child: ticketDetailsWidget('Passenger', username ?? 'user',
+                            'Date', '24-12-2018'),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0, right: 35.0),
                         child: ticketDetailsWidget(
@@ -120,50 +125,19 @@ class _TransactionCompleteState extends State<TransactionComplete> {
                     ],
                   ),
                 ),
-                 
-
-                 Padding (
-                  padding: const EdgeInsets.only(top: 40.0, left: 60.0, right: 60.0) ,
-                      child:Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            QrImage(data:qrData),
-                              SizedBox(height:10.0),
-                                 Text("Data here"),
-                                   SizedBox(
-              height: 10.0,
-            ),
-            FlatButton(
-              padding: EdgeInsets.all(15.0),
-              child:Text("Generate QR code"),
-              onPressed: () { 
-
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius:BorderRadius.circular(20.0),
-                // side:BorderSide(colors:Colors.blue,width:3.0),
-              ),
-            ),
-          ],
-        ),
-       ),
-               // Padding(
-                 // padding: const EdgeInsets.only(top: 60.0, left: 70.0, right: 30.0),
-                  //child: Container(
-                    //width: 150.0,
-                    //height: 150.0,
-                    //decoration: BoxDecoration(
-                      //  image: DecorationImage(
-                        //    image: AssetImage('assets/qr-code.png'),
-                          //  fit: BoxFit.cover)),
-                  //),
-                //),
+                Padding(
+                padding: const EdgeInsets.only(top: 40.0, left: 50.0, right: 30.0),
+                child: Container(
+                width: 180.0,
+                height: 180.0,
+                child: QrImage(data: qrData),
+                ),
+                ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: 10.0, left: 75.0, right: 75.0),
+                      const EdgeInsets.only(top: 10.0, left: 105.0, right: 75.0),
                   child: Text(
-                    '9824 0972 1742 1298',
+                    qrData,
                     style: TextStyle(
                       color: Colors.black,
                     ),

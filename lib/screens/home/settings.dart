@@ -40,6 +40,8 @@ class _SettingsState extends State<Settings> {
         title: Text(
           "Settings",
           style: TextStyle(
+            fontFamily: 'cabin',
+            fontSize: 20.0,
             color: Colors.black,
           ),
         ),
@@ -100,7 +102,7 @@ class _SettingsState extends State<Settings> {
                 Card(
                   child: InkWell(
                     onTap: (){
-
+                      Navigator.pushNamed(context, 'transactionhistory');
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 10.0),

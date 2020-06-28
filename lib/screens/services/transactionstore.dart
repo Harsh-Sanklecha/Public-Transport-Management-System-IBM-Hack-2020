@@ -20,10 +20,9 @@ class TransactionStore {
   });
 
   final Firestore db = Firestore.instance;
+  var tID = new Random().nextInt(999999999-10000000);
 
   storingTransactions() {
-    Random rnd = new Random();
-    var tID = rnd.nextInt(6666);
 
     DocumentReference ref = db
       .collection('/user')
@@ -37,6 +36,10 @@ class TransactionStore {
       'destination': destination,
       'BusNo': busNo,
       'TID': tID,
-    });
+    }); 
+  }
+
+  int getID(){
+    return tID;
   }
 }
