@@ -79,7 +79,7 @@ These are the things which we look forward to add in the future updates:
 - Nearby API (to get suggestions based on the location of the user)
 - GSM tracing (to help in more precice locations of users)
 
-## Our Team / Collaborators
+## Team / Collaborators
 - [Aashray Raj Mathur](https://github.com/aashrayrajm)
 - [Karthika Ponnada](https://github.com/karthika251199)
 - [Diana Susan Francis](https://github.com/Diana-999)
