@@ -2,6 +2,7 @@
 
 Public Transport Management System is a mobile application made using flutter (A cross platform framework).The main objective of this application is to build a platform for integrated monitoring and passenger information servives. 
 
+
 ## Introduction
 
 This application can be used by signing up using your gmail account or phone number after which you have the access to choose the mode of transport. Further you can choose the timings and the seats. You can then proceed to payment after which the ticket will be issued
@@ -16,6 +17,8 @@ This will avoid the direct contact with the ticket collector and the passenger w
 - Advertise to nearby app user using BluetoothLE GATT Server
 - Easy ticket booking ux
 - Instant ticket generator (QR encrypted)
+
+![ibm](https://user-images.githubusercontent.com/44742284/85989742-93311f80-ba0e-11ea-80ac-b0ed1d4bd3b5.gif)
 
 ## Setup
 ### Requirements
