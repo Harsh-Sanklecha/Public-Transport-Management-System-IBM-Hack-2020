@@ -82,5 +82,5 @@ These are the things which we look forward to add in the future updates:
 ## Our Team / Collaborators
 - [Aashray Raj Mathur](https://github.com/aashrayrajm)
 - [Karthika Ponnada](https://github.com/karthika251199)
-- [Diana Susan Francis]
+- Diana Susan Francis
 - [Harsh V Sanklecha](https://github.com/Harsh-Sanklecha)
