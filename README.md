@@ -1,7 +1,3 @@
-Video: https://drive.google.com/file/d/120u1lHVuCoZJKqpJq43d-n1f7f7s7DEi/view?usp=sharing
-
-Full descriptive video - https://drive.google.com/file/d/1i8HwesvnAil2qq8ChxSqNvvj2lsHdNTV/view?usp=sharing
-
 
 # Public Transport Management System
 
