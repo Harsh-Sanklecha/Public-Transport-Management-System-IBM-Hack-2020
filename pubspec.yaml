@@ -32,6 +32,7 @@ dependencies:
   flutter_scan_bluetooth: ^1.1.0
   flutter_ticket_widget: ^0.0.1
   beacon_broadcast: ^0.2.1
+  flutter_blue: ^0.7.2
   
 
 dev_dependencies:

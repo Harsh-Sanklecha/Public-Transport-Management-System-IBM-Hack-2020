@@ -38,7 +38,6 @@ class _TransactionCompleteState extends State<TransactionComplete> {
   }
 
   Widget build(BuildContext context) {
-
     data = ModalRoute.of(context).settings.arguments;
     qrData = data['tID'].toString();
 
@@ -114,8 +113,8 @@ class _TransactionCompleteState extends State<TransactionComplete> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(right: 25.0),
-                        child: ticketDetailsWidget('Passenger', username ?? 'user',
-                            'Date', '24-12-2018'),
+                        child: ticketDetailsWidget('Passenger',
+                            username ?? 'user', 'Date', '28-06-2020'),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0, right: 35.0),
@@ -126,16 +125,17 @@ class _TransactionCompleteState extends State<TransactionComplete> {
                   ),
                 ),
                 Padding(
-                padding: const EdgeInsets.only(top: 40.0, left: 50.0, right: 30.0),
-                child: Container(
-                width: 180.0,
-                height: 180.0,
-                child: QrImage(data: qrData),
-                ),
+                  padding:
+                      const EdgeInsets.only(top: 40.0, left: 50.0, right: 30.0),
+                  child: Container(
+                    width: 180.0,
+                    height: 180.0,
+                    child: QrImage(data: qrData),
+                  ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(top: 10.0, left: 105.0, right: 75.0),
+                  padding: const EdgeInsets.only(
+                      top: 10.0, left: 105.0, right: 75.0),
                   child: Text(
                     qrData,
                     style: TextStyle(

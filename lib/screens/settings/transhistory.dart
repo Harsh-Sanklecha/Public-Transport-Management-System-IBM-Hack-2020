@@ -9,23 +9,22 @@ class TransactionHistory extends StatefulWidget {
 }
 
 class _TransactionHistoryState extends State<TransactionHistory> {
-
   Future _data;
   String uid;
 
   Future getTransactionDetails() async {
-      var db = Firestore.instance;
-      QuerySnapshot data = await db
-          .collection('/user').document(uid).collection('/transactions')
-          .getDocuments();
-          print(uid);
-          print(data.documents.length);
-      return data.documents;
-    }
+    var db = Firestore.instance;
+    QuerySnapshot data = await db
+        .collection('/user')
+        .document(uid)
+        .collection('transactions')
+        .getDocuments();
+    print(uid);
+    print(data.documents);
+    return data.documents;
+  }
+
   @override
-
-
-
   void initState() {
     super.initState();
 
@@ -68,13 +67,19 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       child: Text("Getting data..."),
                     );
                   } else {
-                    return 
+                    return GridView.count(
+                      crossAxisCount: 1,
+                      childAspectRatio: 3,
+                      children: <Widget>[
+                        buildFlutterTicketWidget(),
                         ListView.builder(
                             itemCount: snapshot.data.length,
                             itemBuilder: (_, index) {
                               print(snapshot.data.length);
                               return buildFlutterTicketWidget();
-                            });
+                            }),
+                      ],
+                    );
                   }
                 }),
           )),
@@ -135,7 +140,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                         fontWeight: FontWeight.bold),
                     children: <TextSpan>[
                       TextSpan(
-                          text: '12-02-2020 (10:00 AM)',
+                          text: '28-06-2020 (10:00 AM)',
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.normal)),
                     ]),

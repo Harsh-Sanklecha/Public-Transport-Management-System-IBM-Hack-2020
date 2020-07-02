@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/screens/home/scheduledetail.dart';
-//import 'package:flutterapp/Search.dart';
+import 'package:flutter_scan_bluetooth/flutter_scan_bluetooth.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,6 +14,9 @@ class _HomeState extends State<Home> {
   String busno;
   String busroute;
   Future _data;
+  String data = '';
+  bool _scanning = false;
+  FlutterScanBluetooth _bluetooth = FlutterScanBluetooth();
 
 // Function to get data about bus from databse(Firestore)
   Future getBusDetails() async {
@@ -47,6 +50,20 @@ class _HomeState extends State<Home> {
     }).catchError((e) {
       print(e.toString());
     });
+
+    // Prompting the user to turn on Bluetooth
+    _bluetooth.devices.listen((device) {
+      setState(() {
+        data += device.name + ' (${device.address})\n';
+      });
+    });
+    _bluetooth.scanStopped.listen((device) {
+      setState(() {
+        _scanning = false;
+        data += 'scan stopped\n';
+      });
+    });
+    _bluetooth.startScan(pairedDevices: false);
   }
 
   Widget build(BuildContext context) {
