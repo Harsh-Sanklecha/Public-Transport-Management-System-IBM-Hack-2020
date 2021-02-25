@@ -1,7 +1,7 @@
 
 # Public Transport Management System
 
-Public Transport Management System is a mobile application made using flutter (A cross platform framework).The main objective of this application is to build a platform for integrated monitoring and passenger information servives. 
+Public Transport Management System is a mobile application made using flutter (A cross platform framework).The main objective of this application is to build a platform for integrated monitoring and passenger information services. 
 
 
 ## Introduction
